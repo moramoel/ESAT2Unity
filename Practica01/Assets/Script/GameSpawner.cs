@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public class GameSpawner : MonoBehaviour
 {
+    public GameObject PlayerSpawnPoint;
     // Start is called before the first frame update
     void Start()
     {
