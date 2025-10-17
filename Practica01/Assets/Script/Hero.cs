@@ -23,9 +23,11 @@ public class Hero : MonoBehaviour
 
     //Jump
     private bool is_grounded;
+    public float jumpPower;
     // Start is called before the first frame update
     void Start()
     {
+        is_grounded = false;
         health_ = max_health;
         alive_ = true;
         speedLimitator = 0.3f;
@@ -51,7 +53,7 @@ public class Hero : MonoBehaviour
     {
         if(callback.performed && is_grounded)
         {
-
+            gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         }
     }
 
@@ -74,6 +76,11 @@ public class Hero : MonoBehaviour
         return health_;
     }
 
+    public void IncreaseSpeed(float speedMultiplier)
+    {
+        speedLimitator *= speedMultiplier;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
@@ -86,7 +93,7 @@ public class Hero : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
-            is_grounded = true;
+            is_grounded = false;
         }
     }
 }

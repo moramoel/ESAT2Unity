@@ -325,6 +325,8 @@
 "Assets/Script/GameManager.cs"
 "Assets/Script/GameSpawner.cs"
 "Assets/Script/Hero.cs"
+"Assets/Script/pwrip_score.cs"
+"Assets/Script/pwrup_speed.cs"
 -langversion:8.0
 
 /deterministic
