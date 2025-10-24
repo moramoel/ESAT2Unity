@@ -32,12 +32,16 @@ public class Enemy : MonoBehaviour
             }
 
         }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Player")
         {
-            GameManager.Instance.ModifyScore(-5);
+            collision.gameObject.GetComponent<Hero>().ModifyHealth(-2);
             GameManager.Instance.enemy_count--;
             Destroy(gameObject);
         }

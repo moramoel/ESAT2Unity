@@ -8,6 +8,7 @@ public class GameSpawner : MonoBehaviour
     public GameObject speedGood;
     public GameObject speedBad;
     public GameObject coin;
+    public GameObject health;
 
     private int bost_num;
     private Vector3 ran_pos;
@@ -47,7 +48,7 @@ public class GameSpawner : MonoBehaviour
 
     public void SpawnBosts()
     {
-        bost_num = Random.Range(1,5);
+        bost_num = Random.Range(1,6);
         ran_pos.x = Random.Range(-40, 40);
         ran_pos.y = 1;
         ran_pos.z = Random.Range(-40, 40);
@@ -59,9 +60,13 @@ public class GameSpawner : MonoBehaviour
         {
             Instantiate(speedGood, ran_pos, Quaternion.identity);
         }
-        else
+        else if (bost_num < 5)
         {
             Instantiate(speedBad, ran_pos, Quaternion.identity);
+        }
+        else if (bost_num < 6)
+        {
+            Instantiate(health, ran_pos, Quaternion.identity);
         }
     }
 }

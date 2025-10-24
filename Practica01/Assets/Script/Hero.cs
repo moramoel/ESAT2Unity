@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 
 public class Hero : MonoBehaviour
 {
-    const int max_health = 100;
+    const int max_health = 10;
 
-    private int health_;
+    public int health_;
     public float speedLimitator;
     public float rotationSpeed;
     private bool alive_;
@@ -63,12 +63,23 @@ public class Hero : MonoBehaviour
         gameObject.transform.position += movement;
     }
 
-    void ModifyHealth(int health_modifier)
+    public void ModifyHealth(int health_modifier)
     {
-        health_ += health_modifier;
-        if(health_ < 0)
+        if(health_+health_modifier <= max_health)
         {
-            alive_ = false;
+            health_ += health_modifier;
+        }
+        else
+        {
+            health_ = max_health;
+        }
+        if(health_ <= 0)
+        {
+            GameManager.Instance.ResetPlayer();
+        }
+        else
+        {
+            GameManager.Instance.EditHeart(health_);
         }
     }
     int GetHealth()
