@@ -47,7 +47,8 @@ public class GameManager : MonoBehaviour
         //Init timer
         timer_ = Time.time;
         //Spawnear Heroe
-        if(spawner != null)
+
+        if (spawner != null)
         {
 
             spawner.GetComponent<GameSpawner>().SpawnHero(spawnPoint.transform.position, hero);
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
         //Init timer
         timer_ = Time.time;
         //Spawnear Heroe
+        spawner = GameObject.FindGameObjectWithTag("GameSpawner");
         if (spawner != null)
         {
 
@@ -77,7 +79,7 @@ public class GameManager : MonoBehaviour
         //if (...){
         //    spawner.SpawnEnemy(Vector3, );
         //}
-        if(enemy_count < 3 && spawner != null)
+        if(enemy_count < 10 && spawner != null)
         {
             spawner.GetComponent<GameSpawner>().SpawnEnemy(enemyPF);
         }
@@ -88,6 +90,7 @@ public class GameManager : MonoBehaviour
         if (spawner == null)
         {
             spawner = GameObject.FindGameObjectWithTag("GameSpawner");
+            spawnPoint = GameObject.Find("PlayerSpawnPoint");
             if(spawner != null)
             {
                 spawner.GetComponent<GameSpawner>().SpawnHero(spawnPoint.transform.position, hero);

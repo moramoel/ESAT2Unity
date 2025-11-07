@@ -10,11 +10,13 @@ public class Enemy : MonoBehaviour
     public GameObject target;
     public float distance;
     Vector3 lookvec;
+    float lifeTime;
 
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
+        lifeTime = Time.time + 10;
     }
 
     // Update is called once per frame
@@ -35,13 +37,24 @@ public class Enemy : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            GameManager.Instance.enemy_count--;
         }
+        //if(Time.time > lifeTime)
+        //{
+        //    GameManager.Instance.enemy_count--;
+        //    Destroy(gameObject);
+        //}
     }
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<Hero>().ModifyHealth(-2);
+            GameManager.Instance.enemy_count--;
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.tag == "Vault")
+        {
             GameManager.Instance.enemy_count--;
             Destroy(gameObject);
         }

@@ -37,7 +37,7 @@ public class GameSpawner : MonoBehaviour
 
     public void SpawnHero(Vector3 position, GameObject hero)
     {
-        Instantiate(hero,position, Quaternion.identity);
+        Instantiate(hero, position, Quaternion.identity);
     }
     public void SpawnEnemy(GameObject enemy)
     {

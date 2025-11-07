@@ -98,6 +98,10 @@ public class Hero : MonoBehaviour
         {
             is_grounded = true;
         }
+        if (collision.gameObject.CompareTag("Vault"))
+        {
+            ModifyHealth(-10);
+        }
     }
 
     private void OnCollisionExit(Collision collision)
