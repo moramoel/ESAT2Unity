@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour
     //public GameObject SpawnerObject;
 
     public GameObject spawner;
+
+    public float timeAlive = 0;
 
 
 
@@ -71,6 +74,7 @@ public class GameManager : MonoBehaviour
             spawner.GetComponent<GameSpawner>().SpawnHero(spawnPoint.transform.position, hero);
             spawner.GetComponent<GameSpawner>().SpawnEnemy(enemyPF);
         }
+        timeAlive = Time.time;
     }
 
     // Update is called once per frame
@@ -101,7 +105,9 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-
+        timeAlive -= Time.time;
+        timeAlive *= -1;
+        SceneManager.LoadScene("FinalScene");
     }
 
     public void ModifyScore(int score_mod)
@@ -111,11 +117,18 @@ public class GameManager : MonoBehaviour
 
     public void ResetPlayer()
     {
-        heroGM_ = GameObject.FindGameObjectWithTag("Player");
-        Destroy(heroGM_);
-        spawner.GetComponent<GameSpawner>().SpawnHero(spawnPoint.transform.position, hero);
-        playerLives--;
-        UI.GetComponent<UIManager>().ModifyH();
+        if(playerLives > 1)
+        {
+            heroGM_ = GameObject.FindGameObjectWithTag("Player");
+            Destroy(heroGM_);
+            spawner.GetComponent<GameSpawner>().SpawnHero(spawnPoint.transform.position, hero);
+            playerLives--;
+            UI.GetComponent<UIManager>().ModifyH();
+        }
+        else
+        {
+            EndGame();
+        }
     }
 
     public void EditHeart(int health_)

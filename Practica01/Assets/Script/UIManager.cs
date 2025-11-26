@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Hearts Image")]
     public Image[] heart;
-    public Image heart2;
+    //public Image heart2;
     public Image heart3;
 
     public int lives;
